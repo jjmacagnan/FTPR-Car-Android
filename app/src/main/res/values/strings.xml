@@ -1,3 +1,29 @@
 <resources>
-    <string name="app_name">MyApiTest - COLOQUE O SEU NOME AQUI</string>
+    <string name="app_name">FTPR Car</string>
+    <string name="app_logo">Logo do aplicativo</string>
+    <string name="add_car">Adicionar Carro</string>
+    <string name="car_details">Detalhes do Carro</string>
+    <string name="select_location">Selecionar Localização</string>
+    <string name="view_location">Ver Localização</string>
+    <string name="login_title">Login com Telefone</string>
+    <string name="phone_number_hint">Número de telefone</string>
+    <string name="verification_code_hint">Código de verificação</string>
+    <string name="send_code">Enviar Código</string>
+    <string name="verify_code">Verificar Código</string>
+    <string name="logout">Logout</string>
+    <string name="brand_hint">Marca</string>
+    <string name="model_hint">Modelo</string>
+    <string name="year_hint">Ano</string>
+    <string name="color_hint">Cor</string>
+    <string name="price_hint">Preço</string>
+    <string name="latitude_hint">Latitude</string>
+    <string name="longitude_hint">Longitude</string>
+    <string name="select_image">Selecionar Imagem</string>
+    <string name="select_location_btn">Selecionar Localização</string>
+    <string name="save_car">Salvar Carro</string>
+    <string name="confirm_location">Confirmar Localização</string>
+    <string name="view_on_map">Ver no Mapa</string>
+    <string name="edit">Editar</string>
+    <string name="delete">Excluir</string>
+    <string name="google_maps_key">AIzaSyDAxJtBL4QqjG5_WYne4DsqIbce67zVt3g</string>
 </resources>

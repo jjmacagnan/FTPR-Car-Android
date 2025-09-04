@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="150dp"
+    android:viewportWidth="200"
+    android:viewportHeight="150">
+
+    <!-- Background -->
+    <path
+        android:fillColor="#F5F5F5"
+        android:pathData="M0,0 L200,0 L200,150 L0,150 Z"/>
+
+    <!-- Car simple icon -->
+    <path
+        android:fillColor="#BDBDBD"
+        android:pathData="M150,90 L145,70 L130,60 L70,60 L55,70 L50,90 L50,105 L55,105 L55,100 L65,100 L65,105 L135,105 L135,100 L145,100 L145,105 L150,105 Z"/>
+
+    <!-- Windows -->
+    <path
+        android:fillColor="#E3F2FD"
+        android:pathData="M75,60 L90,60 L90,80 L75,80 Z M110,60 L125,60 L125,80 L110,80 Z"/>
+
+    <!-- Wheels -->
+    <path
+        android:fillColor="#757575"
+        android:pathData="M65,100 L75,100 L75,110 L65,110 Z M125,100 L135,100 L135,110 L125,110 Z"/>
+
+</vector>
