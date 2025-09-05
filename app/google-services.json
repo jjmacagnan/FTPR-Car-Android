@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "273019296410",
-    "project_id": "trabalhofinal-e89cd",
-    "storage_bucket": "trabalhofinal-e89cd.firebasestorage.app"
+    "project_number": "150520896471",
+    "project_id": "trabalhofinal-7f35a",
+    "storage_bucket": "trabalhofinal-7f35a.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:273019296410:android:bc74d593a946443379dd23",
+        "mobilesdk_app_id": "1:150520896471:android:a15e2bdcacb12b4a2b0992",
         "android_client_info": {
           "package_name": "com.example.myapitest"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDyv2cqFzUO2eK7Pmxf_ORCRHEc4EbYKks"
+          "current_key": "AIzaSyDXuYMPlDgXCUukNomtSDts52GL1UD1FME"
         }
       ],
       "services": {

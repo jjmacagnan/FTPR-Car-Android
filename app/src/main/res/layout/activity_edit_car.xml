@@ -20,6 +20,7 @@
             android:layout_gravity="center"
             android:layout_marginBottom="24dp" />
 
+        <!-- Imagem do Carro -->
         <ImageView
             android:id="@+id/ivCarImage"
             android:layout_width="200dp"
@@ -39,6 +40,7 @@
             android:layout_marginBottom="24dp"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
 
+        <!-- Nome do Carro -->
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -46,27 +48,14 @@
             app:boxStrokeColor="@color/primary_color">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etBrand"
+                android:id="@+id/etName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Marca" />
+                android:hint="Nome do Carro" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            app:boxStrokeColor="@color/primary_color">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etModel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Modelo" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
+        <!-- Ano -->
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -82,6 +71,7 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+        <!-- Licença -->
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -89,28 +79,14 @@
             app:boxStrokeColor="@color/primary_color">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etColor"
+                android:id="@+id/etLicence"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Cor" />
+                android:hint="Licença" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            app:boxStrokeColor="@color/primary_color">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etPrice"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Preço"
-                android:inputType="numberDecimal" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
+        <!-- Latitude e Longitude -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -161,6 +137,7 @@
             android:layout_marginBottom="24dp"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
 
+        <!-- Botões Cancelar / Salvar -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -3,9 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/action_refresh"
+        android:title="@string/atualizar"
+        android:icon="@android:drawable/ic_menu_rotate"
+        app:showAsAction="ifRoom" />
+
+    <item
         android:id="@+id/action_logout"
-        android:title="Logout"
-        android:icon="@drawable/ic_logout"
+        android:title="@string/logout"
+        android:icon="@android:drawable/ic_menu_revert"
         app:showAsAction="never" />
 
 </menu>

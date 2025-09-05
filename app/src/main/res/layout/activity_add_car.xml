@@ -29,32 +29,21 @@
             android:layout_marginBottom="24dp"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
 
+        <!-- Nome do Carro -->
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etBrand"
+                android:id="@+id/etName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Marca" />
+                android:hint="Nome" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etModel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Modelo" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
+        <!-- Ano do Carro -->
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -65,37 +54,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Ano"
-                android:inputType="number" />
+                android:inputType="text" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
+        <!-- Placa do Carro -->
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etColor"
+                android:id="@+id/etLicence"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Cor" />
+                android:hint="Placa" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etPrice"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Preço"
-                android:inputType="numberDecimal" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
+        <!-- Latitude e Longitude -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -49,6 +49,7 @@
                         android:textColor="@color/primary_color"
                         android:layout_marginBottom="12dp" />
 
+                    <!-- Nome do carro -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -59,44 +60,21 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Marca:"
+                            android:text="Nome:"
                             android:textStyle="bold"
                             android:textColor="@color/text_primary" />
 
                         <TextView
-                            android:id="@+id/tvCarBrand"
+                            android:id="@+id/tvCarName"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="2"
-                            android:text="Toyota"
+                            android:text="Toyota Corolla"
                             android:textColor="@color/text_secondary" />
 
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_marginBottom="8dp">
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="Modelo:"
-                            android:textStyle="bold"
-                            android:textColor="@color/text_primary" />
-
-                        <TextView
-                            android:id="@+id/tvCarModel"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="2"
-                            android:text="Corolla"
-                            android:textColor="@color/text_secondary" />
-
-                    </LinearLayout>
-
+                    <!-- Ano -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -121,30 +99,7 @@
 
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_marginBottom="8dp">
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="Cor:"
-                            android:textStyle="bold"
-                            android:textColor="@color/text_primary" />
-
-                        <TextView
-                            android:id="@+id/tvCarColor"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="2"
-                            android:text="Preto"
-                            android:textColor="@color/text_secondary" />
-
-                    </LinearLayout>
-
+                    <!-- Licença -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -154,19 +109,17 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Preço:"
+                            android:text="Licença:"
                             android:textStyle="bold"
                             android:textColor="@color/text_primary" />
 
                         <TextView
-                            android:id="@+id/tvCarPrice"
+                            android:id="@+id/tvLicence"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="2"
-                            android:text="R$ 80.000,00"
-                            android:textColor="@color/primary_color"
-                            android:textStyle="bold"
-                            android:textSize="16sp" />
+                            android:text="ABC-1234"
+                            android:textColor="@color/text_secondary" />
 
                     </LinearLayout>
 
@@ -201,7 +154,7 @@
                         android:id="@+id/tvLocation"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Lat: -23.5505, Lng: -46.6333"
+                        android:text="São Paulo, SP"
                         android:textColor="@color/text_secondary"
                         android:layout_marginBottom="12dp" />
 

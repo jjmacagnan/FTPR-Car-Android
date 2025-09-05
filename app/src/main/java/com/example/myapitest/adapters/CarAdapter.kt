@@ -2,42 +2,39 @@ package com.example.myapitest.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.example.myapitest.R
-import com.example.myapitest.databinding.ItemCarBinding
+import com.example.myapitest.databinding.ItemCarLayoutBinding
 import com.example.myapitest.models.Car
+import com.squareup.picasso.Picasso
 
 class CarAdapter(
-    private val cars: List<Car>,
-    private val onItemClick: (Car) -> Unit
-) : RecyclerView.Adapter<CarAdapter.CarViewHolder>() {
+    private val onCarClick: (Car) -> Unit
+) : ListAdapter<Car, CarAdapter.CarViewHolder>(CarDiffCallback()) {
 
-    inner class CarViewHolder(private val binding: ItemCarBinding) :
+    inner class CarViewHolder(private val binding: ItemCarLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(car: Car) {
-            binding.tvCarBrand.text = car.brand
-            binding.tvCarModel.text = car.model
-            binding.tvCarYear.text = car.year.toString()
-            binding.tvCarColor.text = car.color
-            binding.tvCarPrice.text = "R$ ${String.format("%.2f", car.price)}"
+            binding.apply {
+                model.text = car.name
+                year.text = car.year
+                license.text = car.licence
 
-            // Carregar imagem com Glide - USANDO PLACEHOLDER CORRIGIDO
-            Glide.with(binding.root.context)
-                .load(car.imageUrl)
-                .placeholder(R.drawable.placeholder_car) // ALTERADO
-                .error(R.drawable.placeholder_car) // ALTERADO
-                .into(binding.ivCarImage)
+                Picasso.get()
+                    .load(car.imageUrl)
+                    .placeholder(android.R.drawable.ic_menu_camera)
+                    .error(android.R.drawable.ic_menu_close_clear_cancel)
+                    .into(image)
 
-            binding.root.setOnClickListener {
-                onItemClick(car)
+                root.setOnClickListener { onCarClick(car) }
             }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CarViewHolder {
-        val binding = ItemCarBinding.inflate(
+        val binding = ItemCarLayoutBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
@@ -46,8 +43,16 @@ class CarAdapter(
     }
 
     override fun onBindViewHolder(holder: CarViewHolder, position: Int) {
-        holder.bind(cars[position])
+        holder.bind(getItem(position))
     }
 
-    override fun getItemCount() = cars.size
+    private class CarDiffCallback : DiffUtil.ItemCallback<Car>() {
+        override fun areItemsTheSame(oldItem: Car, newItem: Car): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: Car, newItem: Car): Boolean {
+            return oldItem == newItem
+        }
+    }
 }

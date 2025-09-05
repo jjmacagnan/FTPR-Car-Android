@@ -5,55 +5,60 @@ import com.example.myapitest.models.Car
 class CarRepository {
     private val apiService = ApiClient.carService
 
-    suspend fun getCars(): Result<List<Car>> {
-        return try {
+    suspend fun getCars(): ResultWrapper<List<Car>> {
+        return safeApiCall {
             val response = apiService.getCars()
-            if (response.isSuccessful) {
-                Result.success(response.body() ?: emptyList())
-            } else {
-                Result.failure(Exception("Erro na API: ${response.code()}"))
-            }
-        } catch (e: Exception) {
-            Result.failure(e)
+            response.body() ?: emptyList()
         }
     }
 
-    suspend fun createCar(car: Car): Result<Car> {
-        return try {
+    suspend fun getCar(carId: String): ResultWrapper<Car> {
+        return safeApiCall {
+            val response = apiService.getCar(carId)
+            response.body() ?: throw Exception("Car not found")
+        }
+    }
+
+    suspend fun createCar(car: Car): ResultWrapper<Car> {
+        return safeApiCall {
             val response = apiService.createCar(car)
-            if (response.isSuccessful) {
-                Result.success(response.body()!!)
-            } else {
-                Result.failure(Exception("Erro na API: ${response.code()}"))
-            }
-        } catch (e: Exception) {
-            Result.failure(e)
+            response.body() ?: throw Exception("Failed to create car")
         }
     }
 
-    suspend fun updateCar(carId: String, car: Car): Result<Car> {
-        return try {
+    suspend fun createCars(cars: List<Car>): ResultWrapper<List<Car>> {
+        return safeApiCall {
+            val response = apiService.createCars(cars)
+            response.body() ?: emptyList()
+        }
+    }
+
+    suspend fun updateCar(carId: String, car: Car): ResultWrapper<Car> {
+        return safeApiCall {
+            // Usando o objeto Car diretamente ao invés de mapOf
             val response = apiService.updateCar(carId, car)
-            if (response.isSuccessful) {
-                Result.success(response.body()!!)
-            } else {
-                Result.failure(Exception("Erro na API: ${response.code()}"))
-            }
-        } catch (e: Exception) {
-            Result.failure(e)
+            response.body() ?: throw Exception("Failed to update car")
         }
     }
 
-    suspend fun deleteCar(carId: String): Result<Unit> {
+    suspend fun deleteCar(carId: String): ResultWrapper<Unit> {
+        return safeApiCall {
+            apiService.deleteCar(carId)
+            Unit
+        }
+    }
+
+    // Função auxiliar para reduzir repetição de código
+    private suspend fun <T> safeApiCall(apiCall: suspend () -> T): ResultWrapper<T> {
         return try {
-            val response = apiService.deleteCar(carId)
-            if (response.isSuccessful) {
-                Result.success(Unit)
-            } else {
-                Result.failure(Exception("Erro na API: ${response.code()}"))
-            }
+            val result = apiCall()
+            ResultWrapper.Success(result)
+        } catch (e: retrofit2.HttpException) {
+            ResultWrapper.GenericError(e.code(), e.message())
+        } catch (e: java.io.IOException) {
+            ResultWrapper.NetworkError
         } catch (e: Exception) {
-            Result.failure(e)
+            ResultWrapper.GenericError(null, e.message ?: "Unknown error")
         }
     }
 }

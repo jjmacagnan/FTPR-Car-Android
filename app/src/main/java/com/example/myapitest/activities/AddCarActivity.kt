@@ -11,12 +11,14 @@ import androidx.lifecycle.lifecycleScope
 import com.example.myapitest.R
 import com.example.myapitest.databinding.ActivityAddCarBinding
 import com.example.myapitest.models.Car
-import com.example.myapitest.models.Location
+import com.example.myapitest.models.Place
 import com.example.myapitest.network.ApiClient
 import com.example.myapitest.utils.ImageUploadHelper
 import kotlinx.coroutines.launch
+import java.util.UUID
 
 class AddCarActivity : AppCompatActivity() {
+
     private lateinit var binding: ActivityAddCarBinding
     private var selectedImageUri: Uri? = null
     private var selectedLatitude: Double? = null
@@ -38,7 +40,6 @@ class AddCarActivity : AppCompatActivity() {
             result.data?.let { data ->
                 selectedLatitude = data.getDoubleExtra("latitude", 0.0)
                 selectedLongitude = data.getDoubleExtra("longitude", 0.0)
-
                 binding.etLatitude.setText(selectedLatitude.toString())
                 binding.etLongitude.setText(selectedLongitude.toString())
             }
@@ -50,28 +51,23 @@ class AddCarActivity : AppCompatActivity() {
         binding = ActivityAddCarBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = "Adicionar Carro"
+
         setupUI()
     }
 
     private fun setupUI() {
-        binding.btnSelectImage.setOnClickListener {
-            imagePickerLauncher.launch("image/*")
-        }
+        binding.btnSelectImage.setOnClickListener { imagePickerLauncher.launch("image/*") }
 
         binding.btnSelectLocation.setOnClickListener {
             val intent = Intent(this, MapActivity::class.java)
             locationPickerLauncher.launch(intent)
         }
 
-        binding.btnSaveCar.setOnClickListener {
-            saveCar()
-        }
+        binding.btnSaveCar.setOnClickListener { saveCar() }
 
-        // Configurar toolbar
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = "Adicionar Carro"
-
-        // DEFINIR PLACEHOLDER INICIAL
+        // Placeholder inicial
         binding.ivCarImage.setImageResource(R.drawable.placeholder_car)
     }
 
@@ -81,20 +77,19 @@ class AddCarActivity : AppCompatActivity() {
         binding.btnSaveCar.isEnabled = false
         binding.btnSaveCar.text = "Salvando..."
 
-        selectedImageUri?.let { imageUri ->
-            uploadImageAndSaveCar(imageUri)
-        } ?: run {
-            showToast("Selecione uma imagem")
-            resetSaveButton()
-        }
+        selectedImageUri?.let { uploadImageAndSaveCar(it) }
+            ?: run {
+                showToast("Selecione uma imagem")
+                resetSaveButton()
+            }
     }
 
     private fun uploadImageAndSaveCar(imageUri: Uri) {
-        ImageUploadHelper.uploadImage(imageUri) { downloadUrl, error ->
+        ImageUploadHelper.uploadImage(selectedImageUri!!) { downloadUrl, error ->
             if (downloadUrl != null) {
                 createCarObject(downloadUrl)
             } else {
-                showToast("Erro ao fazer upload da imagem: ${error?.message}")
+                showToast("Erro no upload: ${error?.message}")
                 resetSaveButton()
             }
         }
@@ -102,16 +97,14 @@ class AddCarActivity : AppCompatActivity() {
 
     private fun createCarObject(imageUrl: String) {
         val car = Car(
-            brand = binding.etBrand.text.toString().trim(),
-            model = binding.etModel.text.toString().trim(),
-            year = binding.etYear.text.toString().trim().toInt(),
-            color = binding.etColor.text.toString().trim(),
-            price = binding.etPrice.text.toString().trim().toDouble(),
+            id = UUID.randomUUID().toString(),
+            name = binding.etName.text.toString().trim(),
+            year = binding.etYear.text.toString().trim(),
+            licence = binding.etLicence.text.toString().trim(),
             imageUrl = imageUrl,
-            location = Location(
-                latitude = selectedLatitude ?: 0.0,
-                longitude = selectedLongitude ?: 0.0,
-                address = "Endereço não especificado"
+            place = Place(
+                lat = selectedLatitude ?: 0.0,
+                long = selectedLongitude ?: 0.0
             )
         )
 
@@ -126,7 +119,7 @@ class AddCarActivity : AppCompatActivity() {
                     showToast("Carro salvo com sucesso!")
                     finish()
                 } else {
-                    showToast("Erro ao salvar carro")
+                    showToast("Erro ao salvar carro: ${response.code()}")
                     resetSaveButton()
                 }
             } catch (e: Exception) {
@@ -137,40 +130,29 @@ class AddCarActivity : AppCompatActivity() {
     }
 
     private fun validateFields(): Boolean {
-        val brand = binding.etBrand.text.toString().trim()
-        val model = binding.etModel.text.toString().trim()
+        val name = binding.etName.text.toString().trim()
         val year = binding.etYear.text.toString().trim()
-        val color = binding.etColor.text.toString().trim()
-        val price = binding.etPrice.text.toString().trim()
+        val licence = binding.etLicence.text.toString().trim()
 
-        when {
-            brand.isEmpty() -> {
-                binding.etBrand.error = "Campo obrigatório"
-                return false
-            }
-            model.isEmpty() -> {
-                binding.etModel.error = "Campo obrigatório"
-                return false
+        return when {
+            name.isEmpty() -> {
+                binding.etName.error = "Campo obrigatório"
+                false
             }
             year.isEmpty() -> {
                 binding.etYear.error = "Campo obrigatório"
-                return false
+                false
             }
-            color.isEmpty() -> {
-                binding.etColor.error = "Campo obrigatório"
-                return false
-            }
-            price.isEmpty() -> {
-                binding.etPrice.error = "Campo obrigatório"
-                return false
+            licence.isEmpty() -> {
+                binding.etLicence.error = "Campo obrigatório"
+                false
             }
             selectedLatitude == null || selectedLongitude == null -> {
                 showToast("Selecione uma localização")
-                return false
+                false
             }
+            else -> true
         }
-
-        return true
     }
 
     private fun resetSaveButton() {
@@ -183,12 +165,7 @@ class AddCarActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            android.R.id.home -> {
-                finish()
-                return true
-            }
-        }
+        if (item.itemId == android.R.id.home) finish()
         return super.onOptionsItemSelected(item)
     }
 }
