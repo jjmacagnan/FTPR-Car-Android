@@ -13,7 +13,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Editar Carro"
+            android:text="@string/editar_carro"
             android:textSize="24sp"
             android:textStyle="bold"
             android:textColor="@color/primary_color"
@@ -23,20 +23,20 @@
         <!-- Imagem do Carro -->
         <ImageView
             android:id="@+id/ivCarImage"
-            android:layout_width="200dp"
+            android:layout_width="wrap_content"
             android:layout_height="150dp"
             android:layout_gravity="center"
-            android:background="@drawable/placeholder_car"
+            android:background="@drawable/ic_car_placeholder"
             android:scaleType="centerCrop"
             android:layout_marginBottom="16dp"
-            android:contentDescription="Imagem do carro" />
+            android:contentDescription="@string/imagem_do_carro" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnSelectImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Alterar Imagem"
+            android:text="@string/alterar_imagem"
             android:layout_marginBottom="24dp"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
 
@@ -51,7 +51,7 @@
                 android:id="@+id/etName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Nome do Carro" />
+                android:hint="@string/nome_do_carro" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -66,12 +66,12 @@
                 android:id="@+id/etYear"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Ano"
+                android:hint="@string/ano"
                 android:inputType="number" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Licença -->
+        <!-- Placa -->
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -82,7 +82,7 @@
                 android:id="@+id/etLicence"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Licença" />
+                android:hint="@string/placa" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -104,7 +104,7 @@
                     android:id="@+id/etLatitude"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Latitude"
+                    android:hint="@string/latitude"
                     android:inputType="numberDecimal|numberSigned"
                     android:enabled="false" />
 
@@ -121,7 +121,7 @@
                     android:id="@+id/etLongitude"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Longitude"
+                    android:hint="@string/longitude"
                     android:inputType="numberDecimal|numberSigned"
                     android:enabled="false" />
 
@@ -133,7 +133,7 @@
             android:id="@+id/btnSelectLocation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Alterar Localização"
+            android:text="@string/alterar_localizacao"
             android:layout_marginBottom="24dp"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
 
@@ -150,7 +150,7 @@
                 android:layout_height="56dp"
                 android:layout_weight="1"
                 android:layout_marginEnd="8dp"
-                android:text="Cancelar"
+                android:text="@string/cancelar"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
 
             <com.google.android.material.button.MaterialButton
@@ -159,7 +159,7 @@
                 android:layout_height="56dp"
                 android:layout_weight="1"
                 android:layout_marginStart="8dp"
-                android:text="Salvar Alterações"
+                android:text="@string/salvar_alteracoes"
                 android:textSize="14sp"
                 app:cornerRadius="8dp" />
 

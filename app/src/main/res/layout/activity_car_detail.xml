@@ -17,7 +17,7 @@
             android:layout_height="250dp"
             android:scaleType="centerCrop"
             android:background="@color/background_light"
-            android:contentDescription="Imagem do carro" />
+            android:contentDescription="@string/imagem_do_carro" />
 
         <!-- Conteúdo principal -->
         <LinearLayout
@@ -43,7 +43,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Informações do Veículo"
+                        android:text="@string/informacoes_do_veiculo"
                         android:textSize="18sp"
                         android:textStyle="bold"
                         android:textColor="@color/primary_color"
@@ -60,7 +60,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Nome:"
+                            android:text="@string/nome"
                             android:textStyle="bold"
                             android:textColor="@color/text_primary" />
 
@@ -69,7 +69,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="2"
-                            android:text="Toyota Corolla"
+                            android:text="@string/toyota_corolla"
                             android:textColor="@color/text_secondary" />
 
                     </LinearLayout>
@@ -85,7 +85,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Ano:"
+                            android:text="@string/ano"
                             android:textStyle="bold"
                             android:textColor="@color/text_primary" />
 
@@ -94,7 +94,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="2"
-                            android:text="2023"
+                            android:text="@string/_2023"
                             android:textColor="@color/text_secondary" />
 
                     </LinearLayout>
@@ -109,7 +109,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Licença:"
+                            android:text="@string/placa"
                             android:textStyle="bold"
                             android:textColor="@color/text_primary" />
 
@@ -118,7 +118,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="2"
-                            android:text="ABC-1234"
+                            android:text="@string/abc_1234"
                             android:textColor="@color/text_secondary" />
 
                     </LinearLayout>
@@ -144,7 +144,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Localização"
+                        android:text="@string/localizacao"
                         android:textSize="18sp"
                         android:textStyle="bold"
                         android:textColor="@color/primary_color"
@@ -154,7 +154,7 @@
                         android:id="@+id/tvLocation"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="São Paulo, SP"
+                        android:text="@string/sao_paulo_sp"
                         android:textColor="@color/text_secondary"
                         android:layout_marginBottom="12dp" />
 
@@ -162,7 +162,7 @@
                         android:id="@+id/btnViewOnMap"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Ver no Mapa"
+                        android:text="@string/ver_no_mapa"
                         android:drawableStart="@drawable/ic_map"
                         android:drawablePadding="8dp"
                         style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
@@ -184,7 +184,7 @@
                     android:layout_height="56dp"
                     android:layout_weight="1"
                     android:layout_marginEnd="8dp"
-                    android:text="Editar"
+                    android:text="@string/editar"
                     android:drawableStart="@drawable/ic_edit"
                     android:drawablePadding="8dp"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
@@ -195,7 +195,7 @@
                     android:layout_height="56dp"
                     android:layout_weight="1"
                     android:layout_marginStart="8dp"
-                    android:text="Excluir"
+                    android:text="@string/excluir"
                     android:textColor="@color/white"
                     android:backgroundTint="@color/error_color"
                     android:drawableStart="@drawable/ic_delete"

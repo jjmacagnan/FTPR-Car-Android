@@ -15,7 +15,6 @@ import com.example.myapitest.databinding.ActivityEditCarBinding
 import com.example.myapitest.models.Car
 import com.example.myapitest.models.Place
 import com.example.myapitest.network.ApiClient
-import com.example.myapitest.network.CarRepository
 import com.example.myapitest.utils.ImageUploadHelper
 import com.example.myapitest.viewModel.CarViewModel
 import kotlinx.coroutines.launch
@@ -29,17 +28,8 @@ class EditCarActivity : AppCompatActivity() {
     private var selectedLongitude: Double? = null
     private var currentImageUrl: String? = null
 
-    // ViewModel compartilhado
-    private val viewModel: CarViewModel by viewModels {
-        object : androidx.lifecycle.ViewModelProvider.Factory {
-            override fun <T : androidx.lifecycle.ViewModel> create(modelClass: Class<T>): T {
-                if (modelClass.isAssignableFrom(CarViewModel::class.java)) {
-                    return CarViewModel(CarRepository()) as T
-                }
-                throw IllegalArgumentException("Unknown ViewModel class")
-            }
-        }
-    }
+    // Usa o ViewModel que conecta ao CarManager singleton
+    private val viewModel: CarViewModel by viewModels()
 
     private val imagePickerLauncher = registerForActivityResult(
         ActivityResultContracts.GetContent()
@@ -100,8 +90,8 @@ class EditCarActivity : AppCompatActivity() {
 
             Glide.with(this@EditCarActivity)
                 .load(car.imageUrl)
-                .placeholder(R.drawable.placeholder_car)
-                .error(R.drawable.placeholder_car)
+                .placeholder(R.drawable.ic_car_placeholder)
+                .error(R.drawable.ic_car_placeholder)
                 .into(ivCarImage)
         }
     }
@@ -156,7 +146,8 @@ class EditCarActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     showToast("Carro atualizado com sucesso!")
 
-                    // Atualiza lista do MainActivity
+                    // MUDANÇA PRINCIPAL: Atualizar o CarManager singleton
+                    // Isso garante que TODAS as Activities sejam atualizadas automaticamente
                     viewModel.updateCar(updatedCar)
 
                     // Envia de volta para CarDetailActivity

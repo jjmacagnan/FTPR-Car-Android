@@ -13,7 +13,6 @@ import com.bumptech.glide.Glide
 import com.example.myapitest.R
 import com.example.myapitest.databinding.ActivityCarDetailBinding
 import com.example.myapitest.models.Car
-import com.example.myapitest.network.CarRepository
 import com.example.myapitest.utils.UiState
 import com.example.myapitest.viewModel.CarViewModel
 import kotlinx.coroutines.launch
@@ -23,17 +22,8 @@ class CarDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCarDetailBinding
     private lateinit var car: Car
 
-    // ViewModel compartilhado
-    private val viewModel: CarViewModel by viewModels {
-        object : androidx.lifecycle.ViewModelProvider.Factory {
-            override fun <T : androidx.lifecycle.ViewModel> create(modelClass: Class<T>): T {
-                if (modelClass.isAssignableFrom(CarViewModel::class.java)) {
-                    return CarViewModel(CarRepository()) as T
-                }
-                throw IllegalArgumentException("Unknown ViewModel class")
-            }
-        }
-    }
+    // Usa o ViewModel que conecta ao CarManager singleton
+    private val viewModel: CarViewModel by viewModels()
 
     // Launcher para editar carro
     private val editCarLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -42,7 +32,9 @@ class CarDetailActivity : AppCompatActivity() {
             updatedCar?.let {
                 car = it
                 displayCarDetails()
-                viewModel.updateCar(it) // Atualiza MainActivity automaticamente
+                // NOTA: Não precisa chamar viewModel.updateCar() aqui porque
+                // o EditCarActivity já atualizou o CarManager singleton
+                // e TODAS as Activities observando serão notificadas automaticamente
             }
         }
     }
@@ -76,8 +68,8 @@ class CarDetailActivity : AppCompatActivity() {
 
             Glide.with(this@CarDetailActivity)
                 .load(car.imageUrl)
-                .placeholder(R.drawable.placeholder_car)
-                .error(R.drawable.placeholder_car_simple)
+                .placeholder(R.drawable.ic_car_placeholder)
+                .error(R.drawable.ic_car_placeholder)
                 .into(ivCarImage)
         }
     }
@@ -118,7 +110,9 @@ class CarDetailActivity : AppCompatActivity() {
                     is UiState.Loading -> Toast.makeText(this@CarDetailActivity, "Processando...", Toast.LENGTH_SHORT).show()
                     is UiState.Success -> {
                         Toast.makeText(this@CarDetailActivity, state.data, Toast.LENGTH_SHORT).show()
-                        finish() // Fecha a activity e volta para MainActivity
+                        // IMPORTANTE: MainActivity será automaticamente atualizada
+                        // porque observa o mesmo CarManager singleton
+                        finish()
                     }
                     is UiState.Error -> {
                         Toast.makeText(this@CarDetailActivity, "Erro: ${state.message}", Toast.LENGTH_SHORT).show()

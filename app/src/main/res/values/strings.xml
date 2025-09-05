@@ -25,7 +25,6 @@
     <string name="view_on_map">Ver no Mapa</string>
     <string name="edit">Editar</string>
     <string name="delete">Excluir</string>
-    <string name="google_maps_key">AIzaSyDAxJtBL4QqjG5_WYne4DsqIbce67zVt3g</string>
     <string name="atualizar">Atualizar</string>
 
     <!-- Login -->
@@ -42,5 +41,45 @@
     <string name="verification_failed">Falha na verificação: %1$s</string>
     <string name="login_failed">Falha no login: %1$s</string>
     <string name="invalid_verification_code">Código de verificação inválido</string>
+    <string name="imagem_do_carro">Imagem do carro</string>
+    <string name="selecionar_imagem">Selecionar Imagem</string>
+    <string name="nome">Nome</string>
+    <string name="ano">Ano</string>
+    <string name="placa">Placa</string>
+    <string name="latitude">Latitude</string>
+    <string name="longitude">Longitude</string>
+    <string name="selecionar_localizacao">Selecionar Localização</string>
+    <string name="salvar_carro">Salvar Carro</string>
+    <string name="localizacao">Localização</string>
+    <string name="editar_carro">Editar Carro</string>
+    <string name="alterar_imagem">Alterar Imagem</string>
+    <string name="nome_do_carro">Nome do Carro</string>
+    <string name="alterar_localizacao">Alterar Localização</string>
+    <string name="informacoes_do_veiculo">Informações do Veículo</string>
+    <string name="toyota_corolla">Toyota Corolla</string>
+    <string name="salvar_alteracoes">Salvar Alterações</string>
+    <string name="abc_1234">ABC-1234</string>
+    <string name="_2023">2023</string>
+    <string name="sao_paulo_sp">São Paulo, SP</string>
+    <string name="ver_no_mapa">Ver no Mapa</string>
+    <string name="editar">Editar</string>
+    <string name="excluir">Excluir</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="ftpr_car_app">FTPR Car App</string>
+    <string name="numero_de_telefone">Número de telefone</string>
+    <string name="_5511912345678">+5511912345678</string>
+    <string name="enviar_codigo">Enviar Código</string>
+    <string name="codigo_de_verificacao">Código de verificação</string>
+    <string name="_123456">123456</string>
+    <string name="verificar_codigo">Verificar Código</string>
+    <string name="nenhum_carro_encontrado">Nenhum carro encontrado</string>
+    <string name="confirmar_localizacao">Confirmar Localização</string>
+    <string name="centralizar_localizacao">Centralizar localização</string>
+    <string name="lat_0_0_lng_0_0">Lat: 0.0, Lng: 0.0</string>
+    <string name="titulo">Título</string>
+    <string name="toyota">Toyota</string>
+    <string name="corolla">Corolla</string>
+    <string name="preto">Preto</string>
+    <string name="point">•</string>
 
 </resources>

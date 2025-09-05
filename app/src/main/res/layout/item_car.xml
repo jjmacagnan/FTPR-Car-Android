@@ -19,8 +19,8 @@
             android:layout_height="80dp"
             android:layout_marginEnd="16dp"
             android:scaleType="centerCrop"
-            android:background="@drawable/placeholder_car"
-            android:contentDescription="Imagem do carro" />
+            android:background="@drawable/ic_car_placeholder"
+            android:contentDescription="@string/imagem_do_carro" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -32,7 +32,7 @@
                 android:id="@+id/tvCarBrand"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Toyota"
+                android:text="@string/toyota"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:textColor="@color/text_primary" />
@@ -41,7 +41,7 @@
                 android:id="@+id/tvCarModel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Corolla"
+                android:text="@string/corolla"
                 android:textSize="16sp"
                 android:textColor="@color/text_secondary"
                 android:layout_marginTop="4dp" />
@@ -56,21 +56,21 @@
                     android:id="@+id/tvCarYear"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="2023"
+                    android:text="@string/_2023"
                     android:textSize="14sp"
                     android:textColor="@color/text_secondary" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=" • "
+                    android:text="@string/point"
                     android:textColor="@color/text_secondary" />
 
                 <TextView
                     android:id="@+id/tvCarColor"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Preto"
+                    android:text="@string/preto"
                     android:textSize="14sp"
                     android:textColor="@color/text_secondary" />
 

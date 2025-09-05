@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center"
         android:layout_margin="16dp"
-        android:text="Confirmar Localização"
+        android:text="@string/confirmar_localizacao"
         android:visibility="gone"
         app:cornerRadius="24dp" />
 

@@ -17,7 +17,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="FTPR Car App"
+        android:text="@string/ftpr_car_app"
         android:textSize="28sp"
         android:textStyle="bold"
         android:layout_marginBottom="48dp"
@@ -33,9 +33,9 @@
             android:id="@+id/etPhoneNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Número de telefone"
+            android:hint="@string/numero_de_telefone"
             android:inputType="phone"
-            android:text="+5511912345678" />
+            android:text="@string/_5511912345678" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -43,7 +43,7 @@
         android:id="@+id/btnSendCode"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:text="Enviar Código"
+        android:text="@string/enviar_codigo"
         android:textSize="16sp"
         app:cornerRadius="8dp" />
 
@@ -65,10 +65,10 @@
                 android:id="@+id/etVerificationCode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Código de verificação"
+                android:hint="@string/codigo_de_verificacao"
                 android:inputType="number"
                 android:maxLength="6"
-                android:text="123456" />
+                android:text="@string/_123456" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -76,7 +76,7 @@
             android:id="@+id/btnVerifyCode"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:text="Verificar Código"
+            android:text="@string/verificar_codigo"
             android:textSize="16sp"
             app:cornerRadius="8dp" />
 

@@ -16,7 +16,6 @@ import com.example.myapitest.R
 import com.example.myapitest.adapters.CarAdapter
 import com.example.myapitest.databinding.ActivityMainBinding
 import com.example.myapitest.models.Car
-import com.example.myapitest.network.CarRepository
 import com.example.myapitest.utils.UiState
 import com.example.myapitest.viewModel.CarViewModel
 import com.google.firebase.auth.FirebaseAuth
@@ -28,16 +27,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var carAdapter: CarAdapter
     private lateinit var auth: FirebaseAuth
 
-    private val viewModel: CarViewModel by viewModels {
-        object : androidx.lifecycle.ViewModelProvider.Factory {
-            override fun <T : androidx.lifecycle.ViewModel> create(modelClass: Class<T>): T {
-                if (modelClass.isAssignableFrom(CarViewModel::class.java)) {
-                    return CarViewModel(CarRepository()) as T
-                }
-                throw IllegalArgumentException("Unknown ViewModel class")
-            }
-        }
-    }
+    // Agora usa ViewModel simplificado (sem Factory necessário)
+    private val viewModel: CarViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,6 +49,9 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
         viewModel.clearOperationState()
         checkUserAuthentication()
+
+        // MUDANÇA IMPORTANTE: Sempre observa o estado quando volta para MainActivity
+        // Como agora usamos CarManager singleton, as mudanças serão automáticas
     }
 
     private fun checkUserAuthentication() {
@@ -137,6 +131,7 @@ class MainActivity : AppCompatActivity() {
     private fun observeUiStates() {
         lifecycleScope.launch {
             repeatOnLifecycle(androidx.lifecycle.Lifecycle.State.STARTED) {
+                // IMPORTANTE: Observa o estado global do CarManager
                 launch {
                     viewModel.carsState.collect { state -> handleCarsState(state) }
                 }

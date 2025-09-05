@@ -6,14 +6,16 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.myapitest.R
 import com.example.myapitest.databinding.ActivityAddCarBinding
 import com.example.myapitest.models.Car
 import com.example.myapitest.models.Place
-import com.example.myapitest.network.ApiClient
 import com.example.myapitest.utils.ImageUploadHelper
+import com.example.myapitest.utils.UiState
+import com.example.myapitest.viewModel.CarViewModel
 import kotlinx.coroutines.launch
 import java.util.UUID
 
@@ -23,6 +25,9 @@ class AddCarActivity : AppCompatActivity() {
     private var selectedImageUri: Uri? = null
     private var selectedLatitude: Double? = null
     private var selectedLongitude: Double? = null
+
+    // Usa o ViewModel que conecta ao CarManager singleton
+    private val viewModel: CarViewModel by viewModels()
 
     private val imagePickerLauncher = registerForActivityResult(
         ActivityResultContracts.GetContent()
@@ -55,6 +60,7 @@ class AddCarActivity : AppCompatActivity() {
         supportActionBar?.title = "Adicionar Carro"
 
         setupUI()
+        observeOperationState()
     }
 
     private fun setupUI() {
@@ -68,7 +74,34 @@ class AddCarActivity : AppCompatActivity() {
         binding.btnSaveCar.setOnClickListener { saveCar() }
 
         // Placeholder inicial
-        binding.ivCarImage.setImageResource(R.drawable.placeholder_car)
+        binding.ivCarImage.setImageResource(R.drawable.ic_car_placeholder)
+    }
+
+    private fun observeOperationState() {
+        lifecycleScope.launch {
+            viewModel.operationState.collect { state ->
+                when (state) {
+                    is UiState.Idle -> {
+                        binding.btnSaveCar.isEnabled = true
+                        binding.btnSaveCar.text = "Salvar Carro"
+                    }
+                    is UiState.Loading -> {
+                        binding.btnSaveCar.isEnabled = false
+                        binding.btnSaveCar.text = "Salvando..."
+                    }
+                    is UiState.Success -> {
+                        showToast(state.data)
+                        // IMPORTANTE: MainActivity será automaticamente atualizada
+                        // porque observa o mesmo CarManager singleton
+                        finish()
+                    }
+                    is UiState.Error -> {
+                        showToast("Erro: ${state.message}")
+                        resetSaveButton()
+                    }
+                }
+            }
+        }
     }
 
     private fun saveCar() {
@@ -87,7 +120,7 @@ class AddCarActivity : AppCompatActivity() {
     private fun uploadImageAndSaveCar(imageUri: Uri) {
         ImageUploadHelper.uploadImage(selectedImageUri!!) { downloadUrl, error ->
             if (downloadUrl != null) {
-                createCarObject(downloadUrl)
+                createAndSaveCarObject(downloadUrl)
             } else {
                 showToast("Erro no upload: ${error?.message}")
                 resetSaveButton()
@@ -95,7 +128,7 @@ class AddCarActivity : AppCompatActivity() {
         }
     }
 
-    private fun createCarObject(imageUrl: String) {
+    private fun createAndSaveCarObject(imageUrl: String) {
         val car = Car(
             id = UUID.randomUUID().toString(),
             name = binding.etName.text.toString().trim(),
@@ -108,25 +141,9 @@ class AddCarActivity : AppCompatActivity() {
             )
         )
 
-        saveCarToAPI(car)
-    }
-
-    private fun saveCarToAPI(car: Car) {
-        lifecycleScope.launch {
-            try {
-                val response = ApiClient.carService.createCar(car)
-                if (response.isSuccessful) {
-                    showToast("Carro salvo com sucesso!")
-                    finish()
-                } else {
-                    showToast("Erro ao salvar carro: ${response.code()}")
-                    resetSaveButton()
-                }
-            } catch (e: Exception) {
-                showToast("Erro de conexão: ${e.message}")
-                resetSaveButton()
-            }
-        }
+        // MUDANÇA: Usa ViewModel que conecta ao CarManager singleton
+        // Isso garante que MainActivity será atualizada automaticamente
+        viewModel.addCar(car)
     }
 
     private fun validateFields(): Boolean {

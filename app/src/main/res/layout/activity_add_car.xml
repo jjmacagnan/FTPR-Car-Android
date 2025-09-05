@@ -15,17 +15,17 @@
             android:layout_width="200dp"
             android:layout_height="150dp"
             android:layout_gravity="center"
-            android:background="@drawable/placeholder_car"
+            android:background="@drawable/ic_car_placeholder"
             android:scaleType="centerCrop"
             android:layout_marginBottom="16dp"
-            android:contentDescription="Imagem do carro" />
+            android:contentDescription="@string/imagem_do_carro" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnSelectImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Selecionar Imagem"
+            android:text="@string/selecionar_imagem"
             android:layout_marginBottom="24dp"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
 
@@ -39,7 +39,7 @@
                 android:id="@+id/etName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Nome" />
+                android:hint="@string/nome" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -53,7 +53,7 @@
                 android:id="@+id/etYear"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Ano"
+                android:hint="@string/ano"
                 android:inputType="text" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -68,7 +68,7 @@
                 android:id="@+id/etLicence"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Placa" />
+                android:hint="@string/placa" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -89,7 +89,7 @@
                     android:id="@+id/etLatitude"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Latitude"
+                    android:hint="@string/latitude"
                     android:inputType="numberDecimal|numberSigned"
                     android:enabled="false" />
 
@@ -105,7 +105,7 @@
                     android:id="@+id/etLongitude"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Longitude"
+                    android:hint="@string/longitude"
                     android:inputType="numberDecimal|numberSigned"
                     android:enabled="false" />
 
@@ -117,7 +117,7 @@
             android:id="@+id/btnSelectLocation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Selecionar Localização"
+            android:text="@string/selecionar_localizacao"
             android:layout_marginBottom="24dp"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
 
@@ -125,7 +125,7 @@
             android:id="@+id/btnSaveCar"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:text="Salvar Carro"
+            android:text="@string/salvar_carro"
             android:textSize="16sp"
             app:cornerRadius="8dp" />
 

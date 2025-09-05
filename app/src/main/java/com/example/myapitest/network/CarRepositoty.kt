@@ -20,9 +20,15 @@ class CarRepository {
     }
 
     suspend fun createCar(car: Car): ResultWrapper<Car> {
-        return safeApiCall {
-            val response = apiService.createCar(car)
-            response.body() ?: throw Exception("Failed to create car")
+        return try {
+            val response = ApiClient.carService.createCar(car)
+            if (response.isSuccessful) {
+                ResultWrapper.Success(car)
+            } else {
+                ResultWrapper.GenericError(response.code(), "Erro ao criar carro: ${response.code()}")
+            }
+        } catch (e: Exception) {
+            ResultWrapper.NetworkError
         }
     }
 
