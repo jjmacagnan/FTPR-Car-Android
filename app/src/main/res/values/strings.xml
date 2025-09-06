@@ -1,3 +1,127 @@
 <resources>
-    <string name="app_name">MyApiTest - COLOQUE O SEU NOME AQUI</string>
+    <string name="app_name">FTPR Car</string>
+    <string name="app_logo">Logo do aplicativo</string>
+    <string name="add_car">Adicionar Carro</string>
+    <string name="car_details">Detalhes do Carro</string>
+    <string name="select_location">Selecionar Localização</string>
+    <string name="view_location">Ver Localização</string>
+    <string name="login_title">Login com Telefone</string>
+    <string name="phone_number_hint">Número de telefone</string>
+    <string name="verification_code_hint">Código de verificação</string>
+    <string name="send_code">Enviar Código</string>
+    <string name="verify_code">Verificar Código</string>
+    <string name="logout">Logout</string>
+    <string name="brand_hint">Marca</string>
+    <string name="model_hint">Modelo</string>
+    <string name="year_hint">Ano</string>
+    <string name="color_hint">Cor</string>
+    <string name="price_hint">Preço</string>
+    <string name="latitude_hint">Latitude</string>
+    <string name="longitude_hint">Longitude</string>
+    <string name="select_image">Selecionar Imagem</string>
+    <string name="select_location_btn">Selecionar Localização</string>
+    <string name="save_car">Salvar Carro</string>
+    <string name="confirm_location">Confirmar Localização</string>
+    <string name="view_on_map">Ver no Mapa</string>
+    <string name="edit">Editar</string>
+    <string name="delete">Excluir</string>
+    <string name="atualizar">Atualizar</string>
+
+    <!-- Login -->
+    <string name="resend_code">Reenviar</string>
+    <string name="verification_instruction">Digite o código enviado para seu telefone</string>
+    <string name="test_code_hint">Para testes, use o código: 123456</string>
+
+    <!-- Mensagens -->
+    <string name="enter_valid_phone">Digite um número de telefone válido (ex: +5511912345678)</string>
+    <string name="enter_verification_code">Digite o código de verificação</string>
+    <string name="code_sent">Código enviado para %1$s</string>
+    <string name="login_successful">Login realizado com sucesso!</string>
+    <string name="test_login_successful">Login de teste realizado com sucesso!</string>
+    <string name="verification_failed">Falha na verificação: %1$s</string>
+    <string name="login_failed">Falha no login: %1$s</string>
+    <string name="invalid_verification_code">Código de verificação inválido</string>
+    <string name="imagem_do_carro">Imagem do carro</string>
+    <string name="selecionar_imagem">Selecionar Imagem</string>
+    <string name="nome">Nome</string>
+    <string name="ano">Ano</string>
+    <string name="placa">Placa</string>
+    <string name="latitude">Latitude</string>
+    <string name="longitude">Longitude</string>
+    <string name="selecionar_localizacao">Selecionar Localização</string>
+    <string name="salvar_carro">Salvar Carro</string>
+    <string name="localizacao">Localização</string>
+    <string name="editar_carro">Editar Carro</string>
+    <string name="alterar_imagem">Alterar Imagem</string>
+    <string name="nome_do_carro">Nome do Carro</string>
+    <string name="alterar_localizacao">Alterar Localização</string>
+    <string name="informacoes_do_veiculo">Informações do Veículo</string>
+    <string name="toyota_corolla">Toyota Corolla</string>
+    <string name="salvar_alteracoes">Salvar Alterações</string>
+    <string name="abc_1234">ABC-1234</string>
+    <string name="_2023">2023</string>
+    <string name="sao_paulo_sp">São Paulo, SP</string>
+    <string name="ver_no_mapa">Ver no Mapa</string>
+    <string name="editar">Editar</string>
+    <string name="excluir">Excluir</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="ftpr_car_app">FTPR Car App</string>
+    <string name="numero_de_telefone">Número de telefone</string>
+    <string name="_5511912345678">+5511912345678</string>
+    <string name="enviar_codigo">Enviar Código</string>
+    <string name="codigo_de_verificacao">Código de verificação</string>
+    <string name="_123456">123456</string>
+    <string name="verificar_codigo">Verificar Código</string>
+    <string name="nenhum_carro_encontrado">Nenhum carro encontrado</string>
+    <string name="confirmar_localizacao">Confirmar Localização</string>
+    <string name="centralizar_localizacao">Centralizar localização</string>
+    <string name="lat_0_0_lng_0_0">Lat: 0.0, Lng: 0.0</string>
+    <string name="titulo">Título</string>
+    <string name="toyota">Toyota</string>
+    <string name="corolla">Corolla</string>
+    <string name="preto">Preto</string>
+    <string name="point">•</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="lorem_ipsum">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
+        volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus
+        dui nec risus. Maecenas non sodales nisi, vel dictum dolor. Class aptent taciti sociosqu ad
+        litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse blandit eleifend
+        diam, vel rutrum tellus vulputate quis. Aliquam eget libero aliquet, imperdiet nisl a,
+        ornare ex. Sed rhoncus est ut libero porta lobortis. Fusce in dictum tellus.\n\n
+        Suspendisse interdum ornare ante. Aliquam nec cursus lorem. Morbi id magna felis. Vivamus
+        egestas, est a condimentum egestas, turpis nisl iaculis ipsum, in dictum tellus dolor sed
+        neque. Morbi tellus erat, dapibus ut sem a, iaculis tincidunt dui. Interdum et malesuada
+        fames ac ante ipsum primis in faucibus. Curabitur et eros porttitor, ultricies urna vitae,
+        molestie nibh. Phasellus at commodo eros, non aliquet metus. Sed maximus nisl nec dolor
+        bibendum, vel congue leo egestas.\n\n
+        Sed interdum tortor nibh, in sagittis risus mollis quis. Curabitur mi odio, condimentum sit
+        amet auctor at, mollis non turpis. Nullam pretium libero vestibulum, finibus orci vel,
+        molestie quam. Fusce blandit tincidunt nulla, quis sollicitudin libero facilisis et. Integer
+        interdum nunc ligula, et fermentum metus hendrerit id. Vestibulum lectus felis, dictum at
+        lacinia sit amet, tristique id quam. Cras eu consequat dui. Suspendisse sodales nunc ligula,
+        in lobortis sem porta sed. Integer id ultrices magna, in luctus elit. Sed a pellentesque
+        est.\n\n
+        Aenean nunc velit, lacinia sed dolor sed, ultrices viverra nulla. Etiam a venenatis nibh.
+        Morbi laoreet, tortor sed facilisis varius, nibh orci rhoncus nulla, id elementum leo dui
+        non lorem. Nam mollis ipsum quis auctor varius. Quisque elementum eu libero sed commodo. In
+        eros nisl, imperdiet vel imperdiet et, scelerisque a mauris. Pellentesque varius ex nunc,
+        quis imperdiet eros placerat ac. Duis finibus orci et est auctor tincidunt. Sed non viverra
+        ipsum. Nunc quis augue egestas, cursus lorem at, molestie sem. Morbi a consectetur ipsum, a
+        placerat diam. Etiam vulputate dignissim convallis. Integer faucibus mauris sit amet finibus
+        convallis.\n\n
+        Phasellus in aliquet mi. Pellentesque habitant morbi tristique senectus et netus et
+        malesuada fames ac turpis egestas. In volutpat arcu ut felis sagittis, in finibus massa
+        gravida. Pellentesque id tellus orci. Integer dictum, lorem sed efficitur ullamcorper,
+        libero justo consectetur ipsum, in mollis nisl ex sed nisl. Donec maximus ullamcorper
+        sodales. Praesent bibendum rhoncus tellus nec feugiat. In a ornare nulla. Donec rhoncus
+        libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
+        vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
+    </string>
+
 </resources>

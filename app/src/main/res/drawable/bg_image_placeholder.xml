@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Background -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#F5F5F5" />
+            <corners android:radius="8dp" />
+        </shape>
+    </item>
+
+    <!-- Icon -->
+    <item
+        android:width="48dp"
+        android:height="48dp"
+        android:gravity="center">
+        <vector
+            android:width="48dp"
+            android:height="48dp"
+            android:viewportWidth="48"
+            android:viewportHeight="48">
+            <path
+                android:fillColor="#BDBDBD"
+                android:pathData="M36,21 L34.5,18 L31,16 L17,16 L13.5,18 L12,21 L12,31 L13,31 L13,29 L15,29 L15,31 L33,31 L33,29 L35,29 L35,31 L36,31 Z M17,16 L22,16 L22,24 L17,24 Z M26,16 L31,16 L31,24 L26,24 Z M15,29 L17,29 L17,31 L15,31 Z M31,29 L33,29 L33,31 L31,31 Z"/>
+        </vector>
+    </item>
+
+</layer-list>

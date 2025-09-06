@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Background color -->
+    <item android:drawable="@color/primary_color" />
+
+    <!-- Logo centered -->
+    <item
+        android:width="120dp"
+        android:height="120dp"
+        android:drawable="@drawable/ic_car"
+        android:gravity="center" />
+
+</layer-list>
