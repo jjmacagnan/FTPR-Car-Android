@@ -9,10 +9,6 @@ import java.util.concurrent.TimeUnit
 
 object ApiClient {
 
-    // ✅ Ajuste aqui conforme o ambiente que você estiver rodando
-    // Emulador Android Studio → use 10.0.2.2
-    // Genymotion → use 10.0.3.2
-    // Dispositivo físico → use o IP da sua máquina (ex: 192.168.0.15)
     private const val BASE_URL = "http://10.0.2.2:3000/"
 
     private val loggingInterceptor = HttpLoggingInterceptor().apply {

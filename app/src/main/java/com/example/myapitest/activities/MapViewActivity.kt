@@ -45,7 +45,6 @@ class MapViewActivity : AppCompatActivity(), OnMapReadyCallback {
             centerMapOnLocation()
         }
 
-        // Mostrar card com informações
         binding.cardLocationInfo.visibility = View.VISIBLE
         binding.tvLocationTitle.text = title
         binding.tvLocationCoordinates.text = "Lat: $latitude, Lng: $longitude"
@@ -61,10 +60,8 @@ class MapViewActivity : AppCompatActivity(), OnMapReadyCallback {
         )
         centerMapOnLocation()
 
-        // Configurar tipo de mapa
         googleMap.mapType = GoogleMap.MAP_TYPE_NORMAL
 
-        // Habilitar controles
         googleMap.uiSettings.isZoomControlsEnabled = true
         googleMap.uiSettings.isCompassEnabled = true
         googleMap.uiSettings.isMyLocationButtonEnabled = false

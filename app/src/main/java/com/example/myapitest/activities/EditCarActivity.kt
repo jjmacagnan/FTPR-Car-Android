@@ -3,77 +3,44 @@ package com.example.myapitest.activities
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.view.MenuItem
-import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.example.myapitest.R
+import com.example.myapitest.activities.base.BaseCarActivity
 import com.example.myapitest.databinding.ActivityEditCarBinding
 import com.example.myapitest.models.Car
-import com.example.myapitest.models.Place
 import com.example.myapitest.network.ApiClient
-import com.example.myapitest.utils.ImageUploadHelper
-import com.example.myapitest.viewModel.CarViewModel
 import kotlinx.coroutines.launch
 
-class EditCarActivity : AppCompatActivity() {
+class EditCarActivity : BaseCarActivity() {
 
     private lateinit var binding: ActivityEditCarBinding
     private lateinit var car: Car
-    private var selectedImageUri: Uri? = null
-    private var selectedLatitude: Double? = null
-    private var selectedLongitude: Double? = null
     private var currentImageUrl: String? = null
 
-    // Usa o ViewModel que conecta ao CarManager singleton
-    private val viewModel: CarViewModel by viewModels()
-
-    private val imagePickerLauncher = registerForActivityResult(
-        ActivityResultContracts.GetContent()
-    ) { uri ->
-        uri?.let {
-            selectedImageUri = it
-            binding.ivCarImage.setImageURI(it)
-        }
-    }
-
-    private val locationPickerLauncher = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) { result ->
-        if (result.resultCode == RESULT_OK) {
-            result.data?.let { data ->
-                selectedLatitude = data.getDoubleExtra("latitude", 0.0)
-                selectedLongitude = data.getDoubleExtra("longitude", 0.0)
-                binding.etLatitude.setText(selectedLatitude.toString())
-                binding.etLongitude.setText(selectedLongitude.toString())
-            }
-        }
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
         binding = ActivityEditCarBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         car = intent.getParcelableExtra("car")!!
-        setupUI()
-        populateFields()
-    }
+        currentImageUrl = car.imageUrl
+        selectedLatitude = car.place.lat
+        selectedLongitude = car.place.long
 
-    private fun setupUI() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = "Editar ${car.name}"
 
-        binding.btnSelectImage.setOnClickListener { imagePickerLauncher.launch("image/*") }
-        binding.btnSelectLocation.setOnClickListener {
-            val intent = Intent(this, MapActivity::class.java)
-            locationPickerLauncher.launch(intent)
-        }
-        binding.btnSaveChanges.setOnClickListener { saveChanges() }
+        super.onCreate(savedInstanceState)
+        populateFields()
+    }
+
+    override fun setupSpecificUI() {
+        binding.btnSelectImage.setOnClickListener { showImagePickerDialog() }
+        binding.btnSelectLocation.setOnClickListener { openLocationPicker() }
+        binding.btnSaveChanges.setOnClickListener { handleSaveOperation() }
         binding.btnCancel.setOnClickListener { finish() }
+
+        setupLicenceMask(binding.etLicence)
     }
 
     private fun populateFields() {
@@ -84,10 +51,6 @@ class EditCarActivity : AppCompatActivity() {
             etLatitude.setText(car.place.lat.toString())
             etLongitude.setText(car.place.long.toString())
 
-            selectedLatitude = car.place.lat
-            selectedLongitude = car.place.long
-            currentImageUrl = car.imageUrl
-
             Glide.with(this@EditCarActivity)
                 .load(car.imageUrl)
                 .placeholder(R.drawable.ic_car_placeholder)
@@ -96,63 +59,66 @@ class EditCarActivity : AppCompatActivity() {
         }
     }
 
-    private fun saveChanges() {
-        if (!validateFields()) return
+    override fun getNameField(): String = binding.etName.text.toString().trim()
+    override fun getYearField(): String = binding.etYear.text.toString().trim()
+    override fun getLicenceField(): String = binding.etLicence.text.toString().trim()
 
-        binding.btnSaveChanges.isEnabled = false
-        binding.btnSaveChanges.text = "Salvando..."
+    override fun setImageUri(uri: Uri) {
+        binding.ivCarImage.setImageURI(uri)
+    }
 
-        if (selectedImageUri != null) {
-            uploadImageAndSaveCar(selectedImageUri!!)
-        } else {
-            updateCarWithCurrentImage()
+    override fun updateSaveButton(enabled: Boolean, text: String) {
+        binding.btnSaveChanges.isEnabled = enabled
+        binding.btnSaveChanges.text = text
+    }
+
+    override fun resetSaveButton() {
+        updateSaveButton(true, "Salvar Alterações")
+    }
+
+    override fun setLocationFields(latitude: Double, longitude: Double) {
+        binding.etLatitude.setText(latitude.toString())
+        binding.etLongitude.setText(longitude.toString())
+    }
+
+    override fun showFieldError(field: String, message: String) {
+        when (field) {
+            "name" -> binding.etName.error = message
+            "year" -> binding.etYear.error = message
+            "licence" -> binding.etLicence.error = message
         }
     }
 
-    private fun uploadImageAndSaveCar(imageUri: Uri) {
-        ImageUploadHelper.uploadImage(imageUri) { downloadUrl, error ->
-            if (downloadUrl != null) {
-                updateCarObject(downloadUrl)
-            } else {
-                showToast("Erro ao fazer upload da imagem: ${error?.message}")
-                resetSaveButton()
-            }
-        }
+    override fun getCurrentImageUrl(): String {
+        return currentImageUrl ?: car.imageUrl
     }
 
-    private fun updateCarWithCurrentImage() {
-        updateCarObject(currentImageUrl ?: car.imageUrl)
-    }
-
-    private fun updateCarObject(imageUrl: String) {
+    override fun performSaveOperation(imageUrl: String) {
         val updatedCar = car.copy(
-            name = binding.etName.text.toString().trim(),
-            year = binding.etYear.text.toString().trim(),
-            licence = binding.etLicence.text.toString().trim(),
+            name = getNameField(),
+            year = getYearField(),
+            licence = getLicenceField(),
             imageUrl = imageUrl,
-            place = Place(
-                lat = selectedLatitude ?: car.place.lat,
-                long = selectedLongitude ?: car.place.long
+            place = createPlace(
+                selectedLatitude ?: car.place.lat,
+                selectedLongitude ?: car.place.long
             )
         )
 
-        updateCarInAPI(updatedCar)
+        updateCarViaApi(updatedCar)
     }
 
-    private fun updateCarInAPI(updatedCar: Car) {
+    private fun updateCarViaApi(updatedCar: Car) {
         lifecycleScope.launch {
             try {
                 val response = ApiClient.carService.updateCar(updatedCar.id, updatedCar)
                 if (response.isSuccessful) {
                     showToast("Carro atualizado com sucesso!")
-
-                    // MUDANÇA PRINCIPAL: Atualizar o CarManager singleton
-                    // Isso garante que TODAS as Activities sejam atualizadas automaticamente
                     viewModel.updateCar(updatedCar)
 
-                    // Envia de volta para CarDetailActivity
-                    val resultIntent = Intent()
-                    resultIntent.putExtra("updated_car", updatedCar)
+                    val resultIntent = Intent().apply {
+                        putExtra("updated_car", updatedCar)
+                    }
                     setResult(RESULT_OK, resultIntent)
                     finish()
                 } else {
@@ -164,48 +130,5 @@ class EditCarActivity : AppCompatActivity() {
                 resetSaveButton()
             }
         }
-    }
-
-    private fun validateFields(): Boolean {
-        val name = binding.etName.text.toString().trim()
-        val year = binding.etYear.text.toString().trim()
-        val licence = binding.etLicence.text.toString().trim()
-
-        return when {
-            name.isEmpty() -> {
-                binding.etName.error = "Campo obrigatório"
-                false
-            }
-            year.isEmpty() -> {
-                binding.etYear.error = "Campo obrigatório"
-                false
-            }
-            licence.isEmpty() -> {
-                binding.etLicence.error = "Campo obrigatório"
-                false
-            }
-            selectedLatitude == null || selectedLongitude == null -> {
-                showToast("Localização é obrigatória")
-                false
-            }
-            else -> true
-        }
-    }
-
-    private fun resetSaveButton() {
-        binding.btnSaveChanges.isEnabled = true
-        binding.btnSaveChanges.text = "Salvar Alterações"
-    }
-
-    private fun showToast(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == android.R.id.home) {
-            finish()
-            return true
-        }
-        return super.onOptionsItemSelected(item)
     }
 }

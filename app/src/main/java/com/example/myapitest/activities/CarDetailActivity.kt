@@ -22,19 +22,14 @@ class CarDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCarDetailBinding
     private lateinit var car: Car
 
-    // Usa o ViewModel que conecta ao CarManager singleton
     private val viewModel: CarViewModel by viewModels()
 
-    // Launcher para editar carro
     private val editCarLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == RESULT_OK) {
             val updatedCar = result.data?.getParcelableExtra<Car>("updated_car")
             updatedCar?.let {
                 car = it
                 displayCarDetails()
-                // NOTA: Não precisa chamar viewModel.updateCar() aqui porque
-                // o EditCarActivity já atualizou o CarManager singleton
-                // e TODAS as Activities observando serão notificadas automaticamente
             }
         }
     }
@@ -110,8 +105,6 @@ class CarDetailActivity : AppCompatActivity() {
                     is UiState.Loading -> Toast.makeText(this@CarDetailActivity, "Processando...", Toast.LENGTH_SHORT).show()
                     is UiState.Success -> {
                         Toast.makeText(this@CarDetailActivity, state.data, Toast.LENGTH_SHORT).show()
-                        // IMPORTANTE: MainActivity será automaticamente atualizada
-                        // porque observa o mesmo CarManager singleton
                         finish()
                     }
                     is UiState.Error -> {

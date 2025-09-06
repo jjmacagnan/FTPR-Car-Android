@@ -47,6 +47,7 @@ android {
     buildFeatures {
         compose true
         dataBinding true
+        viewBinding true
     }
 
     viewBinding {
@@ -73,6 +74,8 @@ dependencies {
     implementation 'androidx.compose.material3:material3'
     implementation 'androidx.compose.ui:ui-tooling-preview'
     implementation 'androidx.benchmark:benchmark-common:1.4.0'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.6.0'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.6.0'
     debugImplementation 'androidx.compose.ui:ui-tooling'
 
     // Firebase BOM

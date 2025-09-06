@@ -27,7 +27,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var carAdapter: CarAdapter
     private lateinit var auth: FirebaseAuth
 
-    // Agora usa ViewModel simplificado (sem Factory necessário)
     private val viewModel: CarViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,9 +48,6 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
         viewModel.clearOperationState()
         checkUserAuthentication()
-
-        // MUDANÇA IMPORTANTE: Sempre observa o estado quando volta para MainActivity
-        // Como agora usamos CarManager singleton, as mudanças serão automáticas
     }
 
     private fun checkUserAuthentication() {

@@ -54,11 +54,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/ano"
-                android:inputType="text" />
+                android:inputType="number"
+                android:maxLength="4"
+                android:digits="0123456789" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Placa do Carro -->
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -68,8 +69,10 @@
                 android:id="@+id/etLicence"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/placa" />
-
+                android:hint="@string/placa"
+                android:inputType="textCapCharacters"
+                android:maxLength="8"
+                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <!-- Latitude e Longitude -->
