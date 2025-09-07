@@ -6,10 +6,6 @@ import com.example.myapitest.managers.CarManager
 import com.example.myapitest.models.Car
 import kotlinx.coroutines.launch
 
-/**
- * ViewModel que atua como wrapper para o CarManager singleton
- * Agora todas as Activities usarão o mesmo estado global
- */
 class CarViewModel : ViewModel() {
 
     // Expõe os StateFlows do CarManager
