@@ -23,7 +23,6 @@ object ImageUploadHelper {
             return
         }
 
-        // Caminho no Storage: /users/{uid}/cars/{UUID}.jpg
         val imageRef: StorageReference = storage.reference
             .child("users/${user.uid}/cars/${java.util.UUID.randomUUID()}.jpg")
 

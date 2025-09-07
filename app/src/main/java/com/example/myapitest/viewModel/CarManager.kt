@@ -4,13 +4,12 @@ import com.example.myapitest.models.Car
 import com.example.myapitest.network.CarRepository
 import com.example.myapitest.network.ResultWrapper
 import com.example.myapitest.utils.UiState
+import com.example.myapitest.utils.ImageUploadHelper
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.suspendCancellableCoroutine
+import kotlin.coroutines.resume
 
-/**
- * Singleton que gerencia o estado global dos carros
- * Garante que todas as Activities vejam as mesmas mudanças
- */
 object CarManager {
 
     private val repository = CarRepository()
@@ -21,7 +20,6 @@ object CarManager {
     private val _operationState = MutableStateFlow<UiState<String>>(UiState.Idle)
     val operationState: StateFlow<UiState<String>> get() = _operationState
 
-    // Lista interna que mantém referência para atualizações
     private val carsList = mutableListOf<Car>()
 
     suspend fun fetchCars() {
@@ -66,9 +64,29 @@ object CarManager {
         _operationState.value = UiState.Loading
         when (val result = repository.deleteCar(carId)) {
             is ResultWrapper.Success -> {
-                carsList.removeAll { it.id == carId }
-                _carsState.value = UiState.Success(carsList.toList())
-                _operationState.value = UiState.Success("Carro deletado")
+                val carToRemove = carsList.find { it.id == carId }
+
+                try {
+                    carToRemove?.imageUrl?.let { url ->
+                        val success = suspendCancellableCoroutine<Boolean> { cont ->
+                            ImageUploadHelper.deleteImage(url) { ok ->
+                                cont.resume(ok)
+                            }
+                        }
+
+                        if (!success) {
+                            _operationState.value =
+                                UiState.Error("Carro removido, mas erro ao excluir imagem")
+                            return
+                        }
+                    }
+
+                    carsList.removeAll { it.id == carId }
+                    _carsState.value = UiState.Success(carsList.toList())
+                    _operationState.value = UiState.Success("Carro e imagem deletados")
+                } catch (e: Exception) {
+                    _operationState.value = UiState.Error("Erro ao excluir imagem: ${e.message}")
+                }
             }
             is ResultWrapper.GenericError -> _operationState.value =
                 UiState.Error(result.error ?: "Erro genérico")
